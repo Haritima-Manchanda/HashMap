@@ -12,6 +12,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <time.h>
+#include <string>
 using namespace std;
 
 
@@ -23,6 +24,7 @@ hashNode::hashNode(string s){
 	currSize = 0;
 	srand(time(NULL));
 }
+
 hashNode::hashNode(){
 	keyword = "";
 	values = new string[100];
@@ -30,6 +32,7 @@ hashNode::hashNode(){
 	currSize = 0;
 	srand(time(NULL));
 }
+
 hashNode::hashNode(string s, string v){
 	keyword = s;
 	values = new string[100];
@@ -37,11 +40,15 @@ hashNode::hashNode(string s, string v){
 	valuesSize = 100;
 	currSize = 1;
 }
+
 void hashNode::addValue(string v) {
 	// adding a value to the end of the value array associated
 	// with a key
+	if(currSize >= (valuesSize-1))
+		dblArray();
 
 	values[currSize] = v; // (currSize - 1) gives the last index which is occupied. So, values[currSize] is empty
+	currSize++;
 
 }
 void hashNode::dblArray() {
@@ -60,16 +67,17 @@ void hashNode::dblArray() {
 		int currentSize = 0;
 
 		// Copying values to the new value array
-		for(int i = 0; i < newValuesSize; i++){
+		for(int i = 0; i < valuesSize; i++){
 			newValues[i] = values[i];
 			currentSize++;
 		}
 
 		// Deleting the original values array
 		delete []values;
-	}
 
-	return;
+		values = newValues;
+		valuesSize = newValuesSize;
+	}
 }
 
 string hashNode::getRandValue() {
@@ -81,4 +89,6 @@ string hashNode::getRandValue() {
 
 	int randomIndex = rand() % currSize; // makes a random number between 0 and currSize (excluding currSize);
 	string randomWord = values[randomIndex];
+
+	return randomWord;
 }
