@@ -1,5 +1,5 @@
 # HashMap
-Hash Map Data Structure in C++
+Random Novel Generator - Hash Map Data Structure in C++
 
 ## Overview
 For this project we used a word and a set of following words to generate text in a particular “voice”. By voice, I mean the patterns with which different authors use words. Every author has their own unique word patterns. For this example, we emulated Dr. Seuss’ voice and Charles Dickens’ voice. 
